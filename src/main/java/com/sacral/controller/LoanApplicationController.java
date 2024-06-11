@@ -5,10 +5,11 @@ import com.sacral.service.LoanApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/loan-applications")
+@RequestMapping("/loan-applications")
 public class LoanApplicationController {
 
     private final LoanApplicationService loanApplicationService;
@@ -18,30 +19,38 @@ public class LoanApplicationController {
         this.loanApplicationService = loanApplicationService;
     }
 
-    @GetMapping("/{applicantId}")
-    public LoanApplication findByApplicantId(@PathVariable Long applicantId) {
-        return loanApplicationService.findByApplicantId(applicantId);
+    @GetMapping("/status/{status}")
+    public List<LoanApplication> getLoanApplicationsByStatus(@PathVariable String status) {
+        return loanApplicationService.getLoanApplicationsByStatus(status);
     }
 
-    @GetMapping("/credit-score/{minimumCreditScore}")
-    public List<LoanApplication> findByMinimumCreditScore(@PathVariable int minimumCreditScore) {
-        return loanApplicationService.findByMinimumCreditScore(minimumCreditScore);
+    @GetMapping("/loan-product/{loanProduct}")
+    public List<LoanApplication> getLoanApplicationsByLoanProduct(@PathVariable String loanProduct) {
+        return loanApplicationService.getLoanApplicationsByLoanProduct(loanProduct);
     }
 
-    @GetMapping("/loan-requirements")
-    public List<LoanApplication> findByLoanRequirements(@RequestParam double minimumLoanAmount,
-                                                       @RequestParam double maximumInterestRate,
-                                                       @RequestParam int maximumRepaymentPeriod) {
-        return loanApplicationService.findByLoanRequirements(minimumLoanAmount, maximumInterestRate, maximumRepaymentPeriod);
+    @GetMapping("/eligibility-criteria/{eligibilityCriteria}")
+    public List<LoanApplication> getLoanApplicationsByEligibilityCriteria(@PathVariable String eligibilityCriteria) {
+        return loanApplicationService.getLoanApplicationsByEligibilityCriteria(eligibilityCriteria);
     }
 
-    @GetMapping("/approved")
-    public List<LoanApplication> findApprovedApplications() {
-        return loanApplicationService.findApprovedApplications();
+    @GetMapping("/date-range")
+    public List<LoanApplication> getLoanApplicationsByDateRange(@RequestParam("startDate") Date startDate, @RequestParam("endDate") Date endDate) {
+        return loanApplicationService.getLoanApplicationsByDateRange(startDate, endDate);
     }
 
-    @GetMapping("/rejected")
-    public List<LoanApplication> findRejectedApplications() {
-        return loanApplicationService.findRejectedApplications();
+    @GetMapping("/regulatory-changes")
+    public List<LoanApplication> getLoanApplicationsByRegulatoryChanges() {
+        return loanApplicationService.getLoanApplicationsByRegulatoryChanges();
+    }
+
+    @GetMapping("/business-process-changes")
+    public List<LoanApplication> getLoanApplicationsByBusinessProcessChanges() {
+        return loanApplicationService.getLoanApplicationsByBusinessProcessChanges();
+    }
+
+    @GetMapping("/version/{version}")
+    public List<LoanApplication> getLoanApplicationsByVersion(@PathVariable int version) {
+        return loanApplicationService.getLoanApplicationsByVersion(version);
     }
 }

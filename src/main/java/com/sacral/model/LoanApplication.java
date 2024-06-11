@@ -2,6 +2,7 @@
 package com.sacral.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "loan_application")
@@ -11,23 +12,26 @@ public class LoanApplication {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "applicant_id")
-    private Long applicantId;
-
-    @Column(name = "credit_score")
-    private int creditScore;
-
-    @Column(name = "loan_amount")
-    private double loanAmount;
-
-    @Column(name = "interest_rate")
-    private double interestRate;
-
-    @Column(name = "repayment_period")
-    private int repaymentPeriod;
-
     @Column(name = "status")
     private String status;
+
+    @Column(name = "loan_product")
+    private String loanProduct;
+
+    @Column(name = "eligibility_criteria")
+    private String eligibilityCriteria;
+
+    @Column(name = "application_date")
+    private Date applicationDate;
+
+    @Column(name = "regulatory_changes")
+    private boolean regulatoryChanges;
+
+    @Column(name = "business_process_changes")
+    private boolean businessProcessChanges;
+
+    @Column(name = "version")
+    private int version;
 
     // Getters and Setters
 
@@ -39,51 +43,59 @@ public class LoanApplication {
         this.id = id;
     }
 
-    public Long getApplicantId() {
-        return applicantId;
-    }
-
-    public void setApplicantId(Long applicantId) {
-        this.applicantId = applicantId;
-    }
-
-    public int getCreditScore() {
-        return creditScore;
-    }
-
-    public void setCreditScore(int creditScore) {
-        this.creditScore = creditScore;
-    }
-
-    public double getLoanAmount() {
-        return loanAmount;
-    }
-
-    public void setLoanAmount(double loanAmount) {
-        this.loanAmount = loanAmount;
-    }
-
-    public double getInterestRate() {
-        return interestRate;
-    }
-
-    public void setInterestRate(double interestRate) {
-        this.interestRate = interestRate;
-    }
-
-    public int getRepaymentPeriod() {
-        return repaymentPeriod;
-    }
-
-    public void setRepaymentPeriod(int repaymentPeriod) {
-        this.repaymentPeriod = repaymentPeriod;
-    }
-
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getLoanProduct() {
+        return loanProduct;
+    }
+
+    public void setLoanProduct(String loanProduct) {
+        this.loanProduct = loanProduct;
+    }
+
+    public String getEligibilityCriteria() {
+        return eligibilityCriteria;
+    }
+
+    public void setEligibilityCriteria(String eligibilityCriteria) {
+        this.eligibilityCriteria = eligibilityCriteria;
+    }
+
+    public Date getApplicationDate() {
+        return applicationDate;
+    }
+
+    public void setApplicationDate(Date applicationDate) {
+        this.applicationDate = applicationDate;
+    }
+
+    public boolean isRegulatoryChanges() {
+        return regulatoryChanges;
+    }
+
+    public void setRegulatoryChanges(boolean regulatoryChanges) {
+        this.regulatoryChanges = regulatoryChanges;
+    }
+
+    public boolean isBusinessProcessChanges() {
+        return businessProcessChanges;
+    }
+
+    public void setBusinessProcessChanges(boolean businessProcessChanges) {
+        this.businessProcessChanges = businessProcessChanges;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 }

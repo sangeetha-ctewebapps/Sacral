@@ -11,18 +11,26 @@ import java.util.List;
 @Repository
 public interface LoanApplicationRepository extends JpaRepository<LoanApplication, Long> {
 
-    @Query("SELECT la FROM LoanApplication la WHERE la.applicantId = ?1")
-    LoanApplication findByApplicantId(Long applicantId);
+    // Method to retrieve loan applications by status
+    List<LoanApplication> findByStatus(String status);
 
-    @Query("SELECT la FROM LoanApplication la WHERE la.creditScore >= ?1")
-    List<LoanApplication> findByMinimumCreditScore(int minimumCreditScore);
+    // Method to retrieve loan applications by loan product
+    List<LoanApplication> findByLoanProduct(String loanProduct);
 
-    @Query("SELECT la FROM LoanApplication la WHERE la.loanAmount >= ?1 AND la.interestRate <= ?2 AND la.repaymentPeriod <= ?3")
-    List<LoanApplication> findByLoanRequirements(double minimumLoanAmount, double maximumInterestRate, int maximumRepaymentPeriod);
+    // Method to retrieve loan applications by eligibility criteria
+    List<LoanApplication> findByEligibilityCriteria(String eligibilityCriteria);
 
-    @Query("SELECT la FROM LoanApplication la WHERE la.status = 'APPROVED'")
-    List<LoanApplication> findApprovedApplications();
+    // Method to retrieve loan applications by date range
+    List<LoanApplication> findByApplicationDateBetween(Date startDate, Date endDate);
 
-    @Query("SELECT la FROM LoanApplication la WHERE la.status = 'REJECTED'")
-    List<LoanApplication> findRejectedApplications();
+    // Method to retrieve loan applications by regulatory changes
+    @Query("SELECT la FROM LoanApplication la WHERE la.regulatoryChanges = true")
+    List<LoanApplication> findByRegulatoryChanges();
+
+    // Method to retrieve loan applications by business process changes
+    @Query("SELECT la FROM LoanApplication la WHERE la.businessProcessChanges = true")
+    List<LoanApplication> findByBusinessProcessChanges();
+
+    // Method to retrieve loan applications by version
+    List<LoanApplication> findByVersion(int version);
 }
